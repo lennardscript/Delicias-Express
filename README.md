@@ -11,7 +11,7 @@
 
 ## Descripción del negocio 📄
 
-Delicias Express es un restaurnate de comida rápida que ofrece una variedad de opciones ricas y convenientes para satisfacer el hambre y los antojos de sus clientes.
+Delicias Express es un restaurante de comida rápida que ofrece una variedad de opciones ricas y convenientes para satisfacer el hambre y los antojos de sus clientes.
 Con un enfoque en la calidad, la frescura y la rápidez, el restaurante se esfuerza por ofrecer una experiencia culinaria excepcional a sus clientes. Delicias Express 
 ofrece una amplia gama de productos, incluyendo hamburguesas, pizzas artesanales, ensaladas frescas, aperitivos y postres.
 
