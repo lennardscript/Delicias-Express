@@ -23,7 +23,7 @@ orden de compra, genera una factura y prepara los alimentos para su envío o rec
 ## Facturación y envío 🛵
 
 Después de recibir un pedido, el restaurante genera una factura para el cliente y prepara los alimentos. Luego, los alimentos se entregan al cliente a través de un servicio
-de entrega o están disponubles para ser recogidos en el restaurante.
+de entrega o están disponibles para ser recogidos en el restaurante.
 
 ## Tecnologías 💡
 
