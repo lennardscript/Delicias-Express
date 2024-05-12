@@ -1,5 +1,8 @@
 <h1 align="center">
-  Delicias Express
+  <br>
+  <img src="https://i.imgur.com/AXojE6p.png" alt="delicias-express" width="350" />
+  <br>
+    Delicias Express
   <br>
 </h1>
 
