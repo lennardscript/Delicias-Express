@@ -1,0 +1,29 @@
+﻿version: '3.8'
+services:
+  web:
+    build:
+        context: .
+        dockerfile: Dockerfile
+    ports:
+        - "8000:8000"
+        - "8081:8081"
+    environment:
+        - ASPNETCORE_ENVIRONMENT=Development.Docker
+    depends_on:
+        - db
+    networks:
+      - backend-network
+  db:
+    image: "postgres:16.1"
+    environment:
+        POSTGRES_USER: lennard
+        POSTGRES_PASSWORD: lenna123
+        POSTGRES_DB: deliciasexpress_db
+    volumes:
+    - postgres_data:/var/lib/postgresql/data/
+    ports:
+        - "5432:5432"
+volumes:
+    postgres_data:
+networks:
+  backend-network:
