@@ -41,3 +41,12 @@ Estas son las tecnologías que han sido desarrolladas en el proyecto:
 - ![Docker](https://img.shields.io/badge/Docker-2496ED.svg?style=for-the-badge&logo=Docker&logoColor=white)
 - ![Git](https://img.shields.io/badge/Git-F05032?logo=git&logoColor=fff&style=for-the-badge)
 
+La razón de por qué se ha escogido estas tecnologías para el desarrollo del proyecto es, meramente el desarrollo rápido, ágil y estructurado y con las tecnologías escogidas se puede
+lograr este objetivo.
+
+## Desarrolladores 🧑‍💻
+
+- Leandro Burgos
+- Ignacio Godoy
+- Jerson Lienlaf
+
