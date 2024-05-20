@@ -1,9 +1,11 @@
 ﻿version: '3.8'
 services:
-  web:
+  app:
     build:
         context: .
-        dockerfile: Dockerfile
+        dockerfile: Backend/Dockerfile
+        args:
+          BUILD_CONFIGURATION: Release
     ports:
         - "8000:8000"
         - "8081:8081"
@@ -16,9 +18,9 @@ services:
   db:
     image: "postgres:16.1"
     environment:
-        POSTGRES_USER: lennard
-        POSTGRES_PASSWORD: lenna123
-        POSTGRES_DB: deliciasexpress_db
+        POSTGRES_USER: ${POSTGRES_USER}
+        POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+        POSTGRES_DB: ${POSTGRES_DB}
     volumes:
     - postgres_data:/var/lib/postgresql/data/
     ports:
