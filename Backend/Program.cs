@@ -8,9 +8,15 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-// Get connection string
-var connectionString = builder.Configuration.GetConnectionString("PostgreSQLConnection") ??
-                       throw new ArgumentNullException("No tienes una cadena de conexión");
+// Get environment variables
+var host = Environment.GetEnvironmentVariable("POSTGRES_HOST");
+var port = Environment.GetEnvironmentVariable("POSTGRES_PORT");
+var database = Environment.GetEnvironmentVariable("POSTGRES_DB");
+var username = Environment.GetEnvironmentVariable("POSTGRES_USER");
+var password = Environment.GetEnvironmentVariable("POSTGRES_PASSWORD");
+
+// Build connection string
+var connectionString = $"Host={host};Port={port};Database={database};Username={username};Password={password};";
 
 // Register DbContext
 builder.Services.AddDbContext<DataContext>(options => options.UseNpgsql(connectionString));

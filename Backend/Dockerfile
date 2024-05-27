@@ -6,13 +6,26 @@ WORKDIR /app
 EXPOSE 8080
 EXPOSE 8081
 
+# Set environment variables using ARG
+ARG POSTGRES_USER
+ARG POSTGRES_PASSWORD
+ARG POSTGRES_DB
+ARG POSTGRES_HOST
+ARG POSTGRES_PORT
+
+ENV POSTGRES_USER=$POSTGRES_USER
+ENV POSTGRES_PASSWORD=$POSTGRES_PASSWORD
+ENV POSTGRES_DB=$POSTGRES_DB
+ENV POSTGRES_HOST=$POSTGRES_HOST
+ENV POSTGRES_PORT=$POSTGRES_PORT
+
 FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 ARG BUILD_CONFIGURATION=Release
 WORKDIR /src
-COPY ["Backend/Backend.csproj", "Backend/"]
-RUN dotnet restore "./Backend/Backend.csproj"
+COPY ["Backend.csproj", "./"]
+RUN dotnet restore "./Backend.csproj"
 COPY . .
-WORKDIR "/src/Backend"
+WORKDIR "/src"
 RUN dotnet build "./Backend.csproj" -c $BUILD_CONFIGURATION -o /app/build
 
 FROM build AS publish
