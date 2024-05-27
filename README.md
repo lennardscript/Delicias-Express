@@ -12,6 +12,11 @@
   </tr>
 </table>
 
+## Configuración del proyecto ⚙️
+
+Toda la configuración para levantar o correr el proyecto se encuentra en la sección "Wiki" de este repositorio y soluciones de problemas pueden haber al
+momento de intentar levantar el proyecto de manera local y de todo el inconveniente que se le puede presentar.
+
 ## Descripción del negocio 📄
 
 Delicias Express es un restaurante de comida rápida que ofrece una variedad de opciones ricas y convenientes para satisfacer el hambre y los antojos de sus clientes.
