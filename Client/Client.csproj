@@ -13,9 +13,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Content Include="..\.dockerignore">
-      <Link>.dockerignore</Link>
-    </Content>
+    <_ContentIncludedByDefault Remove="publish\web.config" />
+    <_ContentIncludedByDefault Remove="publish\wwwroot\sample-data\weather.json" />
+    <_ContentIncludedByDefault Remove="publish\wwwroot\_framework\blazor.boot.json" />
   </ItemGroup>
 
 </Project>
