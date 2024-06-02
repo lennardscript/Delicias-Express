@@ -1,12 +1,17 @@
-﻿
+﻿@page "/facturacion"
 
 
 <h1 class="text-center"><strong>Facturación</strong></h1>
 
-<div class="container mt-5">
+<div class="container mt-5" style="background-color: #e5e5f7;
+opacity: 0.7;
+background-image:  radial-gradient(#ef850e 1.05px, transparent 1.05px), radial-gradient(#ef850e 1.05px, #e5e5f7 1.05px);
+background-size: 42px 42px;
+background-position: 0 0,21px 21px;
+">
     <div class="row">
         <div class="col-md-6">
-            <h3 class="text-center">Delicias-Express</h3>
+            <h3 class="text-center"> <Strong>Delicias-Express</Strong></h3>
             <form>
                 <div class="mb-3">
                     <label for="inputProducto" class="form-label">Producto</label>
@@ -19,18 +24,23 @@
                 <div class="mb-3">
                     <label for="inputPrecio" class="form-label">Precio</label>
                     <input type="number" class="form-control" id="inputPrecio" placeholder="Ingrese el precio">
+                 
+                
                 </div>
             </form>
         </div>
         <div class="col-md-6">
-            <h3>Subtotal</h3>
-            <p id="subtotal">$0.00</p>
-            <h3>IVA</h3>
-            <p id="iva">$0.00</p>
-            <h3>Total</h3>
-            <p id="total">$0.00</p>
+            <h3 class="text-center">Subtotal</h3>
+            <p class="text-center" id="subtotal">$0.00</p>
+            <h3 class ="text-center">IVA</h3>
+            <p class="text-center" id="iva">$0.00</p>
+            <h3 class="text-center">Total</h3>
+            <p class="text-center" id="total">$0.00</p>
+            <div style="display: flex; justify-content: center;">
+                <button type="button" class="btn btn-warning mb-3">Ir a Pagar</button>
+            </div>
         </div>
-        <button type="button" class="btn btn-outline-primary mt-4">Pagar</button>
+        
 
     </div>
 </div>
