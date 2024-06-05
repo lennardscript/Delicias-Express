@@ -1,53 +1,142 @@
 ﻿@page "/facturacion"
 
-
-<h1 class="text-center"><strong>Facturación</strong></h1>
-
-<div class="container mt-5" style="background-color: #e5e5f7;
-opacity: 0.7;
-background-image:  radial-gradient(#ef850e 1.05px, transparent 1.05px), radial-gradient(#ef850e 1.05px, #e5e5f7 1.05px);
-background-size: 42px 42px;
-background-position: 0 0,21px 21px;
-">
-    <div class="row">
-        <div class="col-md-6">
-            <h3 class="text-center"> <Strong>Delicias-Express</Strong></h3>
-            <form>
-                <div class="mb-3">
-                    <label for="inputProducto" class="form-label">Producto</label>
-                    <input type="text" class="form-control" id="inputProducto" placeholder="Ingrese el nombre del producto">
-                </div>
-                <div class="mb-3">
-                    <label for="inputCantidad" class="form-label">Cantidad</label>
-                    <input type="number" class="form-control" id="inputCantidad" placeholder="Ingrese la cantidad">
-                </div>
-                <div class="mb-3">
-                    <label for="inputPrecio" class="form-label">Precio</label>
-                    <input type="number" class="form-control" id="inputPrecio" placeholder="Ingrese el precio">
-                 
-                
-                </div>
-            </form>
+<div class="container mt-5">
+    <h2 class=" text-center mb-4">Orden de Compra</h2>
+    <form>
+        
+        <div class="form-row">
+            <div class="form-group col-6">
+                <label for="fecha">Fecha</label>
+                <input type="date" class="form-control" id="fecha" required>
+            </div>
+            <div class="form-group col-6">
+                <label for="numeroOrden">Número de Orden</label>
+                <input type="text" class="form-control" id="numeroOrden" placeholder="Ingrese el número de orden" required>
+            </div>
         </div>
-        <div class="col-md-6">
-            <h3 class="text-center">Subtotal</h3>
-            <p class="text-center" id="subtotal">$0.00</p>
-            <h3 class ="text-center">IVA</h3>
-            <p class="text-center" id="iva">$0.00</p>
-            <h3 class="text-center">Total</h3>
-            <p class="text-center" id="total">$0.00</p>
-            <div style="display: flex; justify-content: center;">
-                <button type="button" class="btn btn-warning mb-3">Ir a Pagar</button>
+
+        <h4 class="mt-4">Datos del Proveedor</h4>
+        <div class="form-group p-1">
+            <input type="text" class="form-control" id="nombreProveedor" placeholder="Nombre del proveedor" required>
+        </div>
+        <div class="form-group p-1">
+            
+            <input type="text" class="form-control" id="rutProveedor" placeholder="Rut del proveedor" required>
+        </div>
+        <div class="form-group p-1">
+          
+            <input type="text" class="form-control" id="direccionProveedor" placeholder="Dirección " required>
+        </div>
+        <div class="form-group p-1">
+           
+            <input type="tel" class="form-control" id="telefonoProveedor" placeholder="Teléfono" required>
+        </div>
+        <div class="form-group p-1">
+       
+            <input type="email" class="form-control" id="emailProveedor" placeholder="Correo del proveedor" required>
+        </div>
+
+        <!-- Datos del Cliente -->
+        <h4 class="mt-4">Datos del Cliente</h4>
+        <div class="form-group p-1">
+           
+            <input type="text" class="form-control" id="nombreCliente" placeholder="Nombre del cliente" required>
+        </div>
+        <div class="form-group p-1">
+            
+            <input type="text" class="form-control" id="rutCliente" placeholder="Rut del cliente" required>
+        </div>
+        <div class="form-group p-1">
+           
+            <input type="text" class="form-control" id="direccionCliente" placeholder="Dirección del cliente" required>
+        </div>
+        <div class="form-group p-1">
+           
+            <input type="tel" class="form-control" id="telefonoCliente" placeholder="Teléfono del cliente" required>
+        </div>
+        <div class="form-group p-1">
+           
+            <input type="email" class="form-control" id="emailCliente" placeholder="Email del cliente" required>
+        </div>
+
+        <div class="container mt-5 mb-5">
+            <hr>
+            <div class="row">
+                
+                <div class="col-2">
+                    <h4 class="text-center">Ref.</h4>
+                    
+                    <h5>001</h5>
+                    <h5>003</h5>
+                    <h5>005</h5>
+                   
+                </div>
+                <div class="col-3">
+                    <h4 class="text-center">Descripción</h4>
+                   
+                    <h5>Carne Churrasco</h5>
+                    <h5>Pan de hamburguesa</h5>
+                    <h5>Tomates</h5>
+
+                </div>
+                <div class="col-2">
+                    <h4 class="text-center">Cantidad</h4>
+                  
+                    <h5>12</h5>
+                    <h5>3</h5>
+                    <h5>5</h5>
+
+                </div>
+                <div class="col-2">
+                    <h4 class="text-center">Unitario</h4>
+                  
+                    <h5>$ 1.000</h5>
+                    <h5>$ 3.000</h5>
+                    <h5>$ 10.000</h5>
+
+                </div>
+               
+                <div class="col-2">
+                    <h4 class="text-center">Precio Total</h4>
+                    <h5>$ 1.000</h5>
+                    <h5>$ 3.000</h5>
+                    <h5>$ 10.000</h5>
+
+                </div>
+             
+            </div>
+        </div> 
+
+        <div class="container mt-5 mb-5">
+            <hr>
+            <h1 class="text-center">Total Pedido</h1>
+            <div class="row">
+
+                <div class="col-8">
+                    <h5>Total pedido</h5>
+                    <h5>Descuento</h5>
+                    <h5>Envio</h5>
+                    <h5>Total a pagar</h5>
+
+                </div>
+                <div class="col-4">
+                    <h5>$ 100.000</h5>
+                    <h5>$ -5.000</h5>
+                    <h5>$ 3.000</h5>
+                    <h5>$ 89.000</h5>
+
+                </div>
+               
+
+          
+
             </div>
         </div>
         
-
-    </div>
+        
+        <button type="submit" class="btn btn-primary mb-4 ">Enviar Orden de Compra</button>
+    </form>
 </div>
-
-
-
-
 
 
 
