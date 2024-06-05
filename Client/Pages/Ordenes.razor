@@ -1,11 +1,11 @@
-﻿@page "/weather"
+﻿@page "/ordenes"
 @inject HttpClient Http
 
-<PageTitle>Weather</PageTitle>
+<PageTitle>Ordenes</PageTitle>
 
-<h1>Weather</h1>
+<h1>Ordenes de Compra</h1>
 
-<p>This component demonstrates fetching data from the server.</p>
+<p>Lista de todas las compras realizadas.</p>
 
 @if (forecasts == null)
 {
@@ -16,10 +16,10 @@ else
     <table class="table">
         <thead>
             <tr>
-                <th>Date</th>
-                <th>Temp. (C)</th>
-                <th>Temp. (F)</th>
-                <th>Summary</th>
+                <th>Fecha</th>
+                <th>Cantidad</th>
+                <th>Precio Total</th>
+                <th>Destinatario</th>
             </tr>
         </thead>
         <tbody>
