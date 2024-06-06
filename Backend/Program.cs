@@ -1,4 +1,8 @@
 using Backend.Database;
+using Backend.Models.Users;
+using Backend.Services.Users;
+using DotNetEnv;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -9,17 +13,34 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 // Get environment variables
+Env.Load();
+
 var host = Environment.GetEnvironmentVariable("POSTGRES_HOST");
 var port = Environment.GetEnvironmentVariable("POSTGRES_PORT");
 var database = Environment.GetEnvironmentVariable("POSTGRES_DB");
 var username = Environment.GetEnvironmentVariable("POSTGRES_USER");
 var password = Environment.GetEnvironmentVariable("POSTGRES_PASSWORD");
 
-// Build connection string
+if (string.IsNullOrEmpty(host) || string.IsNullOrEmpty(database) || string.IsNullOrEmpty(username) || string.IsNullOrEmpty(password))
+{
+    throw new Exception("Database connection settings are not set correctly. Please check your environment variables.");
+}
+
+// Get connection string
 var connectionString = $"Host={host};Port={port};Database={database};Username={username};Password={password};";
 
 // Register DbContext
 builder.Services.AddDbContext<DataContext>(options => options.UseNpgsql(connectionString));
+
+// Register DbContext
+builder.Services.AddDbContext<DataContext>(options => options.UseNpgsql(connectionString));
+
+// Register Identity services
+builder.Services.AddIdentity<UserModel, IdentityRole>()
+    .AddEntityFrameworkStores<DataContext>();
+
+// Register UserService
+builder.Services.AddScoped<UserService>();
 
 // Register authorization services
 builder.Services.AddAuthorization();
@@ -55,6 +76,8 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+
+app.UseAuthentication();
 
 app.UseAuthorization();
 

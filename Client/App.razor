@@ -1,4 +1,6 @@
-﻿<Router AppAssembly="@typeof(App).Assembly">
+﻿@inject NavigationManager NavigationManager
+
+<Router AppAssembly="@typeof(App).Assembly">
     <Found Context="routeData">
         <RouteView RouteData="@routeData" DefaultLayout="@typeof(MainLayout)" />
         <FocusOnNavigate RouteData="@routeData" Selector="h1" />
@@ -10,3 +12,28 @@
         </LayoutView>
     </NotFound>
 </Router>
+
+@code {
+    protected override void OnInitialized()
+    {
+        var currentUrl = NavigationManager.ToBaseRelativePath(NavigationManager.Uri);
+        if (!currentUrl.Equals("login", StringComparison.OrdinalIgnoreCase))
+        {
+            RedirectToLogin();
+        }
+    }
+
+    private void RedirectToLogin()
+    {
+        var returnUrl = NavigationManager.ToBaseRelativePath(NavigationManager.Uri);
+
+        if (string.IsNullOrEmpty(returnUrl) || returnUrl.Equals("login", StringComparison.OrdinalIgnoreCase))
+        {
+            NavigationManager.NavigateTo("login", true);
+        }
+        else
+        {
+            NavigationManager.NavigateTo($"login?returnUrl={Uri.EscapeDataString(returnUrl)}", true);
+        }
+    }
+}

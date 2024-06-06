@@ -1,9 +1,16 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Backend.Models.Users;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 
 namespace Backend.Database
 {
-    public class DataContext(DbContextOptions<DataContext> options) : DbContext(options)
+    public class DataContext : IdentityDbContext<UserModel>
     {
+        public DataContext(DbContextOptions<DataContext> options) : base(options) { }
+        // Database tables
+        // public DbSet<UserModel> Users { get; set; }
+        
         public async Task<(bool IsConnected, string Message)> CheckDatabaseConnectionAsync()
         {
             try
