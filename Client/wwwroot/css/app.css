@@ -2,6 +2,22 @@ html, body {
     font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
 }
 
+body {
+    background-color: #f9f9fd;
+
+    background-image: radial-gradient(#f78a45 0.35000000000000003px, #f9f9fd 0.35000000000000003px);
+    background-size: 7px 7px;
+    margin: 0;
+    padding: 0;
+}
+
+.main-content {
+    background-color: inherit;
+    min-height: 100vh;
+
+}
+
+
 h1:focus {
     outline: none;
 }
