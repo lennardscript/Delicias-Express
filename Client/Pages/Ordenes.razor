@@ -1,57 +1,57 @@
 ﻿@page "/ordenes"
 @inject HttpClient Http
 
-<PageTitle>Ordenes</PageTitle>
+<PageTitle>Delicias Express | Ordenes</PageTitle>
 
-<h1>Ordenes de Compra</h1>
-
-<p>Lista de todas las compras realizadas.</p>
-
-@if (forecasts == null)
-{
-    <p><em>Loading...</em></p>
-}
-else
-{
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Fecha</th>
-                <th>Cantidad</th>
-                <th>Precio Total</th>
-                <th>Destinatario</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var forecast in forecasts)
-            {
-                <tr>
-                    <td>@forecast.Date.ToShortDateString()</td>
-                    <td>@forecast.TemperatureF</td>
-                    <td>@forecast.TemperatureF</td>
-                    <td>@forecast.Summary</td>
-                </tr>
-            }
-        </tbody>
-    </table>
-}
-
-@code {
-    private WeatherForecast[]? forecasts;
-
-    protected override async Task OnInitializedAsync()
-    {
-        forecasts = await Http.GetFromJsonAsync<WeatherForecast[]>("sample-data/weather.json");
-    }
-
-    public class WeatherForecast
-    {
-        public DateOnly Date { get; set; }
-
-        public int TemperatureC { get; set; }
-
-        public string? Summary { get; set; }
-
-        public int TemperatureF => 32 + (int)(TemperatureC / 0.5556);
-    }
-}
+@* <h1>Ordenes de Compra</h1> *@
+@* *@
+@* <p>Lista de todas las compras realizadas.</p> *@
+@* *@
+@* @if (forecasts == null) *@
+@* { *@
+@*     <p><em>Loading...</em></p> *@
+@* } *@
+@* else *@
+@* { *@
+@*     <table class="table"> *@
+@*         <thead> *@
+@*             <tr> *@
+@*                 <th>Fecha</th> *@
+@*                 <th>Cantidad</th> *@
+@*                 <th>Precio Total</th> *@
+@*                 <th>Destinatario</th> *@
+@*             </tr> *@
+@*         </thead> *@
+@*         <tbody> *@
+@*             @foreach (var forecast in forecasts) *@
+@*             { *@
+@*                 <tr> *@
+@*                     <td>@forecast.Date.ToShortDateString()</td> *@
+@*                     <td>@forecast.TemperatureF</td> *@
+@*                     <td>@forecast.TemperatureF</td> *@
+@*                     <td>@forecast.Summary</td> *@
+@*                 </tr> *@
+@*             } *@
+@*         </tbody> *@
+@*     </table> *@
+@* } *@
+@* *@
+@* @code { *@
+@*     private WeatherForecast[]? forecasts; *@
+@* *@
+@*     protected override async Task OnInitializedAsync() *@
+@*     { *@
+@*         forecasts = await Http.GetFromJsonAsync<WeatherForecast[]>("sample-data/weather.json"); *@
+@*     } *@
+@* *@
+@*     public class WeatherForecast *@
+@*     { *@
+@*         public DateOnly Date { get; set; } *@
+@* *@
+@*         public int TemperatureC { get; set; } *@
+@* *@
+@*         public string? Summary { get; set; } *@
+@* *@
+@*         public int TemperatureF => 32 + (int)(TemperatureC / 0.5556); *@
+@*     } *@
+@* } *@

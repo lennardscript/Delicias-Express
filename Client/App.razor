@@ -16,11 +16,11 @@
 @code {
     protected override void OnInitialized()
     {
-        var currentUrl = NavigationManager.ToBaseRelativePath(NavigationManager.Uri);
-        if (!currentUrl.Equals("login", StringComparison.OrdinalIgnoreCase))
-        {
-            RedirectToLogin();
-        }
+        // var currentUrl = NavigationManager.ToBaseRelativePath(NavigationManager.Uri);
+        // if (!currentUrl.Equals("login", StringComparison.OrdinalIgnoreCase))
+        // {
+        //     RedirectToLogin();
+        // }
     }
 
     private void RedirectToLogin()

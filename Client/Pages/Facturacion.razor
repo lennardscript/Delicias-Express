@@ -1,157 +1,299 @@
 ﻿@page "/facturacion"
 
-<div class="container mt-5">
-    <h2 class=" text-center mb-4">Orden de Compra</h2>
-    <form>
-        
-        <div class="form-row">
-            <div class="form-group col-6">
-                <label for="fecha">Fecha</label>
-                <input type="date" class="form-control" id="fecha" required>
-            </div>
-            <div class="form-group col-6">
-                <label for="numeroOrden">Número de Orden</label>
-                <input type="text" class="form-control" id="numeroOrden" placeholder="Ingrese el número de orden" required>
-            </div>
+<PageTitle>Delicias Express | Facturación</PageTitle>
+
+<div class="container">
+    <main>
+        <div class="py-5 text-center">
+            <img class="d-block mx-auto mb-4" src="logo-delicias.png" alt="logo" width="150" height="95"/>
+            <h2>Facturación</h2>
+            <p class="lead">Aquí puede facturar sus ordenes de compra</p>
         </div>
 
-        <h4 class="mt-4">Datos del Proveedor</h4>
-        <div class="form-group p-1">
-            <input type="text" class="form-control" id="nombreProveedor" placeholder="Nombre del proveedor" required>
-        </div>
-        <div class="form-group p-1">
-            
-            <input type="text" class="form-control" id="rutProveedor" placeholder="Rut del proveedor" required>
-        </div>
-        <div class="form-group p-1">
-          
-            <input type="text" class="form-control" id="direccionProveedor" placeholder="Dirección " required>
-        </div>
-        <div class="form-group p-1">
-           
-            <input type="tel" class="form-control" id="telefonoProveedor" placeholder="Teléfono" required>
-        </div>
-        <div class="form-group p-1">
-       
-            <input type="email" class="form-control" id="emailProveedor" placeholder="Correo del proveedor" required>
-        </div>
+        @* <div class="row g-5"> *@
+        @*     <div class="col-md-5 col-lg-4 order-md-last"> *@
+        @*         <h4 class="d-flex justify-content-between align-items-center mb-3"> *@
+        @*         </h4> *@
+        @*         <ul class="list-group mb-3"> *@
+        @*             <h6>Productos</h6> *@
+        @*             <li class="list-group-item d-flex justify-content-between lh-sm"> *@
+        @*                 <div class="col-4">Hamburguesa</div> *@
+        @*                 <div class="col-4 text-center">3</div> *@
+        @*                 <div class="col-4 text-right">$1500</div> *@
+        @*             </li> *@
+        @*             <li class="list-group-item d-flex justify-content-between lh-sm"> *@
+        @*                 <div class="col-4">Pizza</div> *@
+        @*                 <div class="col-4 text-center">3</div> *@
+        @*                 <div class="col-4 text-right">$1500</div> *@
+        @*             </li> *@
+        @*             <hr> *@
+        @*             <h6>Resumen</h6> *@
+        @*             <li class="list-group-item d-flex justify-content-between lh-sm"> *@
+        @*                 <div class="col-4">Subtotal</div> *@
+        @*                 <div class="col-4"></div> *@
+        @*                 <div class="col-4 text-right">$1500</div> *@
+        @*             </li> *@
+        @*             <li class="list-group-item d-flex justify-content-between lh-sm"> *@
+        @*                 <div class="col-4">IVA</div> *@
+        @*                 <div class="col-4"></div> *@
+        @*                 <div class="col-4 text-right">19%</div> *@
+        @*             </li> *@
+        @*             <li class="list-group-item d-flex justify-content-between lh-sm"> *@
+        @*                 <div class="col-4">Total</div> *@
+        @*                 <div class="col-4"></div> *@
+        @*                 <div class="col-4 text-right"> *@
+        @*                     <strong>$1500</strong> *@
+        @*                 </div> *@
+        @*             </li> *@
+        @*         </ul> *@
+        @*         <div class="input-field"> *@
+        @*             <input type="submit" class="submit" value="Generar factura"/> *@
+        @*         </div> *@
+        @*     </div> *@
+        @* </div> *@
 
-        <!-- Datos del Cliente -->
-        <h4 class="mt-4">Datos del Cliente</h4>
-        <div class="form-group p-1">
-           
-            <input type="text" class="form-control" id="nombreCliente" placeholder="Nombre del cliente" required>
-        </div>
-        <div class="form-group p-1">
-            
-            <input type="text" class="form-control" id="rutCliente" placeholder="Rut del cliente" required>
-        </div>
-        <div class="form-group p-1">
-           
-            <input type="text" class="form-control" id="direccionCliente" placeholder="Dirección del cliente" required>
-        </div>
-        <div class="form-group p-1">
-           
-            <input type="tel" class="form-control" id="telefonoCliente" placeholder="Teléfono del cliente" required>
-        </div>
-        <div class="form-group p-1">
-           
-            <input type="email" class="form-control" id="emailCliente" placeholder="Email del cliente" required>
-        </div>
-
-        <div class="container mt-5 mb-5">
-            <hr>
-            <div class="row">
-                
-                <div class="col-2">
-                    <h4 class="text-center">Ref.</h4>
-                    
-                    <h5>001</h5>
-                    <h5>003</h5>
-                    <h5>005</h5>
-                   
+        <div class="col-md-7 col-lg-8">
+            <h4 class="mb-3">Información</h4>
+            <form class="needs-validation was-validated" novalidate="">
+                <div class="row g-3">
+                    <div class="col-12">
+                        <label class="form-label" for="username">Nombre del cliente</label>
+                        <div class="input-group has-validation">
+                            <input class="form-control" id="username" type="text" placeholder="Nombre del cliente" required=""/>
+                        </div>
+                        <div class="invalid-feedback">
+                            El nombre del cliente es requerido
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <label class="form-label" for="email">Correo</label>
+                        <input class="form-control" id="email" type="email" placeholder="you@example.com" required=""/>
+                        <div class="invalid-feedback">
+                            Por favor, ingrese un correo válido, este campo es requerido
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <label class="form-label" for="address">Dirección</label>
+                        <input class="form-control" type="text" placeholder="Calle 123" required="" />
+                        <div class="invalid-feedback">
+                            Por favor, ingrese una dirección válida
+                        </div>
+                    </div>
                 </div>
-                <div class="col-3">
-                    <h4 class="text-center">Descripción</h4>
-                   
-                    <h5>Carne Churrasco</h5>
-                    <h5>Pan de hamburguesa</h5>
-                    <h5>Tomates</h5>
-
-                </div>
-                <div class="col-2">
-                    <h4 class="text-center">Cantidad</h4>
-                  
-                    <h5>12</h5>
-                    <h5>3</h5>
-                    <h5>5</h5>
-
-                </div>
-                <div class="col-2">
-                    <h4 class="text-center">Unitario</h4>
-                  
-                    <h5>$ 1.000</h5>
-                    <h5>$ 3.000</h5>
-                    <h5>$ 10.000</h5>
-
-                </div>
-               
-                <div class="col-2">
-                    <h4 class="text-center">Precio Total</h4>
-                    <h5>$ 1.000</h5>
-                    <h5>$ 3.000</h5>
-                    <h5>$ 10.000</h5>
-
-                </div>
-             
-            </div>
-        </div> 
-
-        <div class="container mt-5 mb-5">
-            <hr>
-            <h1 class="text-center">Total Pedido</h1>
-            <div class="row">
-
-                <div class="col-8">
-                    <h5>Total pedido</h5>
-                    <h5>Descuento</h5>
-                    <h5>Envio</h5>
-                    <h5>Total a pagar</h5>
-
-                </div>
-                <div class="col-4">
-                    <h5>$ 100.000</h5>
-                    <h5>$ -5.000</h5>
-                    <h5>$ 3.000</h5>
-                    <h5>$ 89.000</h5>
-
-                </div>
-               
-
-          
-
-            </div>
+            </form>
         </div>
-        
-        
-        <button type="submit" style="margin-bottom:30px;color: #fff; background-color: darkorange; padding: 1.3em 3em; font-size: 12px; text-transform: uppercase; letter-spacing: 2.5px; font-weight: 500;  border: none; border-radius: 45px; transition: all 0.3s ease 0s; cursor: pointer; outline: none;">Enviar Orden de Compra</button>
-    </form>
+    </main>
 </div>
 
-
 <style>
-    
-    button:hover {
-        box-shadow: 0px 15px 20px rgba(46, 229, 157, 0.4);
-        color: black;
-        transform: translateY(-7px);
+    .input-field {
+        display: flex;
+        flex-direction: column;
+        position: relative;
+        padding: 0 10px 0 10px;
     }
 
-    button:active {
-        transform: translateY(-1px);
+    .input {
+        height: 45px;
+        width: 100%;
+        background: transparent;
+        border: none;
+        border-bottom: 1px solid rgb(0, 0, 0, 0.2);
+        outline: none;
+        margin-bottom: 20px;
+        color: #40414a;
+    }
+
+    .input-box .input-field label {
+        position: absolute;
+        top: 10px;
+        left: 10px;
+        pointer-events: none;
+        transition: .3s;
+    }
+
+    .input-field .input:focus ~ label {
+        top: -10px;
+        font-size: 13px;
+    }
+
+    .input-field .input:valid ~ label {
+        top: -10px;
+        font-size: 13px;
+        color: #5d5076;
+    }
+
+    .input-field .input:focus, .input-field .input:valid {
+        border-bottom: 1px solid #747264;
+    }
+
+    .submit {
+        border: none;
+        outline: none;
+        height: 45px;
+        background: #FF6666;
+        color: white;
+        border-radius: 5px;
+        transition: .4s;
+    }
+
+    .submit:hover {
+        background: #FF0000;
     }
 </style>
 
-@code {
-
-}
+@* <div class="container mt-5"> *@
+@*     <h2 class=" text-center mb-4">Orden de Compra</h2> *@
+@*     <form> *@
+@*          *@
+@*         <div class="form-row"> *@
+@*             <div class="form-group col-6"> *@
+@*                 <label for="fecha">Fecha</label> *@
+@*                 <input type="date" class="form-control" id="fecha" required> *@
+@*             </div> *@
+@*             <div class="form-group col-6"> *@
+@*                 <label for="numeroOrden">Número de Orden</label> *@
+@*                 <input type="text" class="form-control" id="numeroOrden" placeholder="Ingrese el número de orden" required> *@
+@*             </div> *@
+@*         </div> *@
+@* *@
+@*         <h4 class="mt-4">Datos del Proveedor</h4> *@
+@*         <div class="form-group p-1"> *@
+@*             <input type="text" class="form-control" id="nombreProveedor" placeholder="Nombre del proveedor" required> *@
+@*         </div> *@
+@*         <div class="form-group p-1"> *@
+@*              *@
+@*             <input type="text" class="form-control" id="rutProveedor" placeholder="Rut del proveedor" required> *@
+@*         </div> *@
+@*         <div class="form-group p-1"> *@
+@*            *@
+@*             <input type="text" class="form-control" id="direccionProveedor" placeholder="Dirección " required> *@
+@*         </div> *@
+@*         <div class="form-group p-1"> *@
+@*             *@
+@*             <input type="tel" class="form-control" id="telefonoProveedor" placeholder="Teléfono" required> *@
+@*         </div> *@
+@*         <div class="form-group p-1"> *@
+@*         *@
+@*             <input type="email" class="form-control" id="emailProveedor" placeholder="Correo del proveedor" required> *@
+@*         </div> *@
+@* *@
+@*         <!-- Datos del Cliente --> *@
+@*         <h4 class="mt-4">Datos del Cliente</h4> *@
+@*         <div class="form-group p-1"> *@
+@*             *@
+@*             <input type="text" class="form-control" id="nombreCliente" placeholder="Nombre del cliente" required> *@
+@*         </div> *@
+@*         <div class="form-group p-1"> *@
+@*              *@
+@*             <input type="text" class="form-control" id="rutCliente" placeholder="Rut del cliente" required> *@
+@*         </div> *@
+@*         <div class="form-group p-1"> *@
+@*             *@
+@*             <input type="text" class="form-control" id="direccionCliente" placeholder="Dirección del cliente" required> *@
+@*         </div> *@
+@*         <div class="form-group p-1"> *@
+@*             *@
+@*             <input type="tel" class="form-control" id="telefonoCliente" placeholder="Teléfono del cliente" required> *@
+@*         </div> *@
+@*         <div class="form-group p-1"> *@
+@*             *@
+@*             <input type="email" class="form-control" id="emailCliente" placeholder="Email del cliente" required> *@
+@*         </div> *@
+@* *@
+@*         <div class="container mt-5 mb-5"> *@
+@*             <hr> *@
+@*             <div class="row"> *@
+@*                  *@
+@*                 <div class="col-2"> *@
+@*                     <h4 class="text-center">Ref.</h4> *@
+@*                      *@
+@*                     <h5>001</h5> *@
+@*                     <h5>003</h5> *@
+@*                     <h5>005</h5> *@
+@*                     *@
+@*                 </div> *@
+@*                 <div class="col-3"> *@
+@*                     <h4 class="text-center">Descripción</h4> *@
+@*                     *@
+@*                     <h5>Carne Churrasco</h5> *@
+@*                     <h5>Pan de hamburguesa</h5> *@
+@*                     <h5>Tomates</h5> *@
+@* *@
+@*                 </div> *@
+@*                 <div class="col-2"> *@
+@*                     <h4 class="text-center">Cantidad</h4> *@
+@*                    *@
+@*                     <h5>12</h5> *@
+@*                     <h5>3</h5> *@
+@*                     <h5>5</h5> *@
+@* *@
+@*                 </div> *@
+@*                 <div class="col-2"> *@
+@*                     <h4 class="text-center">Unitario</h4> *@
+@*                    *@
+@*                     <h5>$ 1.000</h5> *@
+@*                     <h5>$ 3.000</h5> *@
+@*                     <h5>$ 10.000</h5> *@
+@* *@
+@*                 </div> *@
+@*                 *@
+@*                 <div class="col-2"> *@
+@*                     <h4 class="text-center">Precio Total</h4> *@
+@*                     <h5>$ 1.000</h5> *@
+@*                     <h5>$ 3.000</h5> *@
+@*                     <h5>$ 10.000</h5> *@
+@* *@
+@*                 </div> *@
+@*               *@
+@*             </div> *@
+@*         </div>  *@
+@* *@
+@*         <div class="container mt-5 mb-5"> *@
+@*             <hr> *@
+@*             <h1 class="text-center">Total Pedido</h1> *@
+@*             <div class="row"> *@
+@* *@
+@*                 <div class="col-8"> *@
+@*                     <h5>Total pedido</h5> *@
+@*                     <h5>Descuento</h5> *@
+@*                     <h5>Envio</h5> *@
+@*                     <h5>Total a pagar</h5> *@
+@* *@
+@*                 </div> *@
+@*                 <div class="col-4"> *@
+@*                     <h5>$ 100.000</h5> *@
+@*                     <h5>$ -5.000</h5> *@
+@*                     <h5>$ 3.000</h5> *@
+@*                     <h5>$ 89.000</h5> *@
+@* *@
+@*                 </div> *@
+@*                 *@
+@* *@
+@*            *@
+@* *@
+@*             </div> *@
+@*         </div> *@
+@*          *@
+@*          *@
+@*         <button type="submit" style="margin-bottom:30px;color: #fff; background-color: darkorange; padding: 1.3em 3em; font-size: 12px; text-transform: uppercase; letter-spacing: 2.5px; font-weight: 500;  border: none; border-radius: 45px; transition: all 0.3s ease 0s; cursor: pointer; outline: none;">Enviar Orden de Compra</button> *@
+@*     </form> *@
+@* </div> *@
+@* *@
+@* *@
+@* <style> *@
+@*      *@
+@*     button:hover { *@
+@*         box-shadow: 0px 15px 20px rgba(46, 229, 157, 0.4); *@
+@*         color: black; *@
+@*         transform: translateY(-7px); *@
+@*     } *@
+@* *@
+@*     button:active { *@
+@*         transform: translateY(-1px); *@
+@*     } *@
+@* </style> *@
+@* *@
+@* @code { *@
+@* *@
+@* } *@
