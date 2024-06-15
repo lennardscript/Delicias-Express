@@ -3,7 +3,221 @@
 
 <PageTitle>Delicias Express | Ordenes</PageTitle>
 
-@* <h1>Ordenes de Compra</h1> *@
+<div class="container">
+	<main>
+		<div class="py-5 text-center">
+            <img class="d-block mx-auto mb-4" src="logo-delicias.png" alt="logo" width="150" height="95"/>
+            <h2>Ordenes de Compra</h2>  
+
+			<div class="input-container">
+				<input type="text" name="text" class="input" placeholder="Buscar...">
+				<span class="icon">
+					<svg width="19px" height="19px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+						<g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+						<g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+						<g id="SVGRepo_iconCarrier">
+							<path opacity="1" d="M14 5H20" stroke="#000" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+							</path> <path opacity="1" d="M14 8H17" stroke="#000" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+							<path d="M21 11.5C21 16.75 16.75 21 11.5 21C6.25 21 2 16.75 2 11.5C2 6.25 6.25 2 11.5 2" stroke="#000" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                            <path opacity="1" d="M22 22L20 20" stroke="#000" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"></path>
+						</g>
+					</svg>
+				</span>
+			</div>
+        </div>
+
+        <div class="container mt-4">
+ 
+            <table class="table">
+                <thead>
+                    <tr class="custom-table-header">
+                        <th>Código</th>
+                        <th>Nombre</th>
+                        <th>Fecha</th>
+                        <th>Dirección</th>
+                        <th>Producto</th>
+                        <th>Cantidad</th>
+                        <th>Total</th>
+                        <th>Estado</th>
+                        
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>001</td>
+                        <td>Juan Pérez</td>
+                        <td>02/02/2024</td>
+                        <td>Calle 123, Ciudad</td>
+                        <td>Camisa</td>
+                        <td>2</td>
+                        <td>$50.00</td>
+                        <td>
+                         <input type="button" value="Rechazado" class="btn btn-danger" />
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>002</td>
+                        <td>Maria López</td>
+                        <td>02/02/2024</td>
+                        <td>Avenida 456, Ciudad</td>
+                        <td>Pantalón</td>
+                        <td>1</td>
+                        <td>$30.00</td>
+                        <td>
+                            <input type="button" value="Aceptado" class="btn btn-success" />
+
+                        </td>
+                      
+                    </tr>
+                    <!-- Agrega más filas según sea necesario -->
+                </tbody>
+            </table>
+        </div>
+
+
+
+
+
+	</main>
+</div>
+
+
+<style>
+
+	.input-container {
+	width: 220px;
+	position: relative;
+	
+}
+
+.icon {
+  position: absolute;
+  right: 10px;
+  top: calc(50% + 5px);
+  transform: translateY(calc(-50% - 5px));
+}
+
+.input {
+  width: 100%;
+  height: 40px;
+  padding: 10px;
+  transition: .2s linear;
+  border: 2.5px solid red;
+  font-size: 14px;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
+.input:focus {
+  outline: none;
+  border: 0.5px solid red;
+  box-shadow: -5px -5px 0px red;
+}
+
+.input-container:hover > .icon {
+  animation: anim 1s linear infinite;
+}
+
+	.keyframes anim {
+	  0%,
+	  100% {
+		transform: translateY(calc(-50% - 5px)) scale(1);
+	  }
+
+	  50% {
+		transform: translateY(calc(-50% - 5px)) scale(1.1);
+	  }
+	}
+
+.bin-button {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 55px;
+  height: 55px;
+  border-radius: 50%;
+  background-color: rgb(255, 95, 95);
+  cursor: pointer;
+  border: 2px solid rgb(255, 201, 201);
+  transition-duration: 0.3s;
+  position: relative;
+  overflow: hidden;
+}
+.bin-bottom {
+  width: 15px;
+  z-index: 2;
+}
+.bin-top {
+  width: 17px;
+  transform-origin: right;
+  transition-duration: 0.3s;
+  z-index: 2;
+}
+.bin-button:hover .bin-top {
+  transform: rotate(45deg);
+}
+.bin-button:hover {
+  background-color: rgb(255, 0, 0);
+}
+.bin-button:active {
+  transform: scale(0.9);
+}
+.garbage {
+  position: absolute;
+  width: 14px;
+  height: auto;
+  z-index: 1;
+  opacity: 0;
+  transition: all 0.3s;
+}
+.bin-button:hover .garbage {
+  animation: throw 0.4s linear;
+}
+.keyframes throw {
+  from {
+    transform: translate(-400%, -700%);
+    opacity: 0;
+  }
+  to {
+    transform: translate(0%, 0%);
+    opacity: 1;
+  }
+}
+
+</style>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 @* *@
 @* <p>Lista de todas las compras realizadas.</p> *@
 @* *@
