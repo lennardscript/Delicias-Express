@@ -1,9 +1,12 @@
+using System.Text;
 using Backend.Database;
 using Backend.Models.Users;
 using Backend.Services.Users;
 using DotNetEnv;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -20,6 +23,7 @@ var port = Environment.GetEnvironmentVariable("POSTGRES_PORT");
 var database = Environment.GetEnvironmentVariable("POSTGRES_DB");
 var username = Environment.GetEnvironmentVariable("POSTGRES_USER");
 var password = Environment.GetEnvironmentVariable("POSTGRES_PASSWORD");
+var jwtSecretKey = Environment.GetEnvironmentVariable("JWT_SECRET_KEY");
 
 if (string.IsNullOrEmpty(host) || string.IsNullOrEmpty(database) || string.IsNullOrEmpty(username) || string.IsNullOrEmpty(password))
 {
@@ -44,6 +48,33 @@ builder.Services.AddScoped<UserService>();
 
 // Register authorization services
 builder.Services.AddAuthorization();
+
+// Add JWT authentication
+
+builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+    .AddJwtBearer(options =>
+    {
+        Console.WriteLine($"JWT_SECRET_KEY: {jwtSecretKey}");
+        options.TokenValidationParameters = new TokenValidationParameters
+        {
+            ValidateIssuer = false,
+            ValidateAudience = false,
+            ValidateLifetime = true,
+            ValidateIssuerSigningKey = true,
+            IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtSecretKey))
+        };
+    });
+
+// Add this in the ConfigureServices method
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowMyOrigin", builder =>
+    {
+        builder.WithOrigins("http://localhost:5111")
+            .AllowAnyHeader()
+            .AllowAnyMethod();
+    });
+});
 
 var app = builder.Build();
 
@@ -74,6 +105,9 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
+// Add this in Configure method before UseRouting
+app.UseCors("AllowMyOrigin");
 
 app.UseHttpsRedirection();
 

@@ -25,7 +25,6 @@ public class UserService
         var user = await _userManager.FindByEmailAsync(email);
         if (user != null && await _userManager.CheckPasswordAsync(user, password))
         {
-            await _signInManager.SignInAsync(user, isPersistent: false);
             return user;
         }
 
@@ -39,6 +38,12 @@ public class UserService
     
     public async Task<UserModel> GetUserAsync(ClaimsPrincipal userPrincipal)
     {
-        return await _userManager.GetUserAsync(userPrincipal);
+        var userId = userPrincipal.FindFirstValue(ClaimTypes.NameIdentifier);
+        if (userId == null)
+        {
+            return null;
+        }
+
+        return await _userManager.FindByIdAsync(userId);
     }
 }

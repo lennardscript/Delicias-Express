@@ -1,9 +1,12 @@
 ﻿@page "/register"
 @layout EmptyLayout
+@inject HttpClient Http
+@inject NavigationManager NavigationManager
+@inject CurrieTechnologies.Razor.SweetAlert2.SweetAlertService Swal
 
 <PageTitle>Delicias Express | Registro</PageTitle>
 
-<form method="post">
+<EditForm Model="model" OnValidSubmit="RegisterUser" novalidate>
     <div class="wrapper">
         <div class="container main">
             <div class="row">
@@ -14,27 +17,27 @@
                     <div class="input-box">
                         <header>Registro</header>
                         <div class="input-field">
-                            <input type="text" class="input" id="name" required autocomplete="off"/>
-                            <label for="name">Nombre o Razón social</label>
+                            <InputText type="text" class="input" id="name" required autocomplete="off" @bind-Value="model.Nombre"/>
+                            <label for="name">Nombre</label>
                         </div>
                         <div class="input-field">
-                            <input type="text" class="input" id="email" required autocomplete="off"/>
+                            <InputText type="text" class="input" id="email" required autocomplete="off" @bind-Value="model.Email"/>
                             <label for="email">Email</label>
                         </div>
                         <div class="input-field">
-                            <input type="tel" class="input" id="phone" required autocomplete="off"/>
+                            <InputText type="tel" class="input" id="phone" required autocomplete="off" @bind-Value="model.Telefono"/>
                             <label for="phone">Número de telefono</label>
                         </div>
                         <div class="input-field">
-                            <input type="text" class="input" id="address" required autocomplete="off"/>
+                            <InputText type="text" class="input" id="address" required autocomplete="off" @bind-Value="model.Direccion"/>
                             <label for="address">Dirección</label>
                         </div>
                         <div class="input-field">
-                            <input type="password" class="input" id="password" required/>
+                            <InputText type="password" class="input" id="password" required @bind-Value="model.Password"/>
                             <label for="password">Contraseña</label>
                         </div>
                         <div class="input-field">
-                            <input type="password" class="input" id="password" required/>
+                            <InputText type="password" class="input" id="confirmPassword" required @bind-Value="model.ConfirmPassword"/>
                             <label for="password">Confirmar contraseña</label>
                         </div>
                         <div class="input-field">
@@ -48,7 +51,89 @@
             </div>
         </div>
     </div>
-</form>
+</EditForm>
+
+@code
+{
+    private RegisterModel model = new RegisterModel();
+    private string errorMessage;
+    private bool IsPasswordValid;
+    private bool IsConfirmPasswordValid;
+    private EditContext editContext = new EditContext(new RegisterModel());
+
+    protected override void OnInitialized()
+    {
+        editContext = new EditContext(model);
+    }
+
+    private async Task RegisterUser()
+    {
+
+        if (string.IsNullOrEmpty(model.Nombre) || string.IsNullOrEmpty(model.Email) || string.IsNullOrEmpty(model.Telefono) || string.IsNullOrEmpty(model.Direccion) || string.IsNullOrEmpty(model.Password) || string.IsNullOrEmpty(model.ConfirmPassword))
+        {
+            await Swal.FireAsync("Error", "Por favor, rellene todos los campos", SweetAlertIcon.Error);
+            return;
+        }
+        
+        var isValid = editContext.Validate();
+        if (!isValid)
+        {
+            var validationMessages = editContext.GetValidationMessages();
+            foreach (var message in validationMessages)
+            {
+                errorMessage = message;
+            }
+
+            await Swal.FireAsync("Error", errorMessage, SweetAlertIcon.Error);
+            return;
+        }
+
+        IsPasswordValid = ValidatePassword(model.Password);
+        IsConfirmPasswordValid = model.Password == model.ConfirmPassword;
+
+        if (!IsPasswordValid)
+        {
+             errorMessage= "La contraseña debe tener al menos un carácter en mayúscula y al menos un carácter no alfanumérico.";
+             await Swal.FireAsync("Error", errorMessage, SweetAlertIcon.Error);
+            return;
+        }
+
+        if (!IsConfirmPasswordValid)
+        {
+            errorMessage = "Las contraseñas no coinciden.";
+            await Swal.FireAsync("Error", errorMessage, SweetAlertIcon.Error);
+            return;
+        }
+
+        var response = await Http.PostAsJsonAsync("http://localhost:8080/api/v1/User/register", model);
+
+        if (response.IsSuccessStatusCode)
+        {
+            await Swal.FireAsync("Exito", "Registro exitoso", SweetAlertIcon.Success);
+            NavigationManager.NavigateTo("/home");
+        }
+        else
+        {
+            errorMessage = await response.Content.ReadAsStringAsync();
+            await Swal.FireAsync("Error", "No se pudo registrar. Por favor, inténtalo de nuevo", SweetAlertIcon.Error);
+        }
+    }
+
+    private bool ValidatePassword(string password)
+    {
+        return password.Any(char.IsUpper) && password.Any(char.IsPunctuation);
+    }
+
+    public class RegisterModel
+    {
+        public string Nombre { get; set; } = string.Empty;
+        public string Email { get; set; } = string.Empty;
+        public string Telefono { get; set; } = string.Empty;
+        public string Direccion { get; set; } = string.Empty;
+        public string Password { get; set; } = string.Empty;
+        public string ConfirmPassword { get; set; } = string.Empty;
+    }
+}
 
 <style>
     .wrapper {

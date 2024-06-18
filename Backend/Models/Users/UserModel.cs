@@ -6,11 +6,8 @@ namespace Backend.Models.Users;
 public class UserModel : IdentityUser
 {
     [Required]
-    [StringLength(12, ErrorMessage = "El RUT debe tener entre 12 caracteres")]
-    public string RUT { get; set; }
-    [Required]
     [StringLength(100, ErrorMessage = "El nombre/razón social es demasiado largo")]
-    public string NombreRazonSocial { get; set; }
+    public string Nombre { get; set; }
     [Required]
     [StringLength(100, ErrorMessage = "La dirección es demasiado larga")]
     public string Direccion { get; set; }

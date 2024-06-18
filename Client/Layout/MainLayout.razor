@@ -1,4 +1,7 @@
 ﻿@inherits LayoutComponentBase
+@inject CurrieTechnologies.Razor.SweetAlert2.SweetAlertService Swal
+@inject NavigationManager NavigationManager
+
 <div class="page">
     <div class="sidebar">
         <NavMenu/>
@@ -6,10 +9,11 @@
 
     <main>
         <div class="top-row px-4">
-
-            <NavLink class="nav-link" href="" Match="NavLinkMatch.All">
-                <span aria-hidden="true"></span> Cerrar Sesión
-            </NavLink>
+            <span>
+                <a class="nav-item" @onclick="Logout">
+                    Cerrar sesión
+                </a>
+            </span>
         </div>
 
         <article class="content px-4">
@@ -17,3 +21,24 @@
         </article>
     </main>
 </div>
+
+@code
+{
+    private async Task Logout()
+    {
+        var result = await Swal.FireAsync(new SweetAlertOptions()
+        {
+            Title = "¿Estás seguro?",
+            Text = "¿Desea cerrar sesión?",
+            Icon = SweetAlertIcon.Question,
+            ShowCancelButton = true,
+            ConfirmButtonText = "Sí, cerrar sesión",
+            CancelButtonText = "No, cancelar"
+        });
+
+        if (!string.IsNullOrEmpty(result.Value))
+        {
+            NavigationManager.NavigateTo("/");
+        }
+    }
+}
