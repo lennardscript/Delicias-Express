@@ -1,36 +1,52 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+<h1 align="center">
+  <br>
+  <img src="https://i.imgur.com/AXojE6p.png" alt="delicias-express" width="350" />
+  <br>
+    Delicias Express
+  <br>
+</h1>
 
-## Getting Started
+<table align="center">
+  <tr>
+    <td>Una plataforma de orden de compra de temática culinaria</td>
+  </tr>
+</table>
 
-First, run the development server:
+## Configuración del proyecto ⚙️
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+Toda la configuración para levantar o correr el proyecto se encuentra en la sección "Wiki" de este repositorio y soluciones de problemas pueden haber al
+momento de intentar levantar el proyecto de manera local y de todo el inconveniente que se le puede presentar.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Descripción del negocio 📄
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Delicias Express es un restaurante de comida rápida que ofrece una variedad de opciones ricas y convenientes para satisfacer el hambre y los antojos de sus clientes. Con un enfoque en la calidad, la frescura y la rápidez, el restaurante se esfuerza por ofrecer una experiencia culinaria excepcional a sus clientes. Delicias Express ofrece una amplia gama de productos, incluyendo hamburguesas, pizzas artesanales, ensaladas frescas, aperitivos y postres.
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+## Proceso de ventas 📈
 
-## Learn More
+Los clientes realizan sus pedidos a través de la plataforma en línea del restaurante o en persona en el mostrador. Una vez recibido el pedido, el restaurante procesa la
+orden de compra, genera una factura y prepara los alimentos para su envío o recogida.
 
-To learn more about Next.js, take a look at the following resources:
+## Facturación y envío 🛵
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Después de recibir un pedido, el restaurante genera una factura para el cliente y prepara los alimentos. Luego, los alimentos se entregan al cliente a través de un servicio
+de entrega o están disponibles para ser recogidos en el restaurante.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+## Tecnologías 💡
 
-## Deploy on Vercel
+Estas son las tecnologías que han sido desarrolladas en el proyecto:
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+- ![HTML5](https://img.shields.io/badge/HTML5-E34F26.svg?style=for-the-badge&logo=HTML5&logoColor=white)
+- ![CSS3](https://img.shields.io/badge/CSS3-1572B6.svg?style=for-the-badge&logo=CSS3&logoColor=white)
+- ![Bootstrap](https://img.shields.io/badge/Bootstrap-7952B3?logo=bootstrap&logoColor=fff&style=for-the-badge)
+- ![TypeScript](https://img.shields.io/badge/TypeScript-3178C6?logo=typescript&logoColor=fff&style=for-the-badge)
+- ![Next.js](https://img.shields.io/badge/Next.js-000?logo=nextdotjs&logoColor=fff&style=for-the-badge)
+- ![Firebase](https://img.shields.io/badge/Firebase-FFCA28?logo=firebase&logoColor=000&style=for-the-badge)
+- ![Git](https://img.shields.io/badge/Git-F05032?logo=git&logoColor=fff&style=for-the-badge)
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+La razón de por qué se ha escogido estas tecnologías para el desarrollo del proyecto es, meramente el desarrollo rápido, ágil y estructurado y con las tecnologías escogidas se puede lograr este objetivo.
+
+## Desarrolladores 🧑‍💻
+
+- Leandro Burgos
+- Ignacio Godoy
+- Jerson Lienlaf
