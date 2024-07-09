@@ -1,6 +1,32 @@
-import React from "react";
+import { auth, firestore } from "@/utils/firebase/firebase";
+import { User } from "firebase/auth";
+import { doc, getDoc } from "firebase/firestore";
+import React, { useEffect, useState } from "react";
 
 export default function CardHeader() {
+  const [user, setUser] = useState<User | null>(null);
+  const [name, setName] = useState<string | null>(null);
+
+  useEffect(() => {
+    const unsubscribe = auth.onAuthStateChanged(async (user) => {
+      if (user) {
+        setUser(user);
+        const userDoc = await getDoc(doc(firestore, "users", user.uid));
+
+        if (userDoc.exists()) {
+          setName(userDoc.data().name);
+        }
+      } else {
+        setUser(null);
+        setName(null);
+      }
+    });
+
+    return () => unsubscribe();
+    {
+    }
+  }, []);
+
   return (
     <>
       <div className="row-cols-2">
@@ -12,7 +38,9 @@ export default function CardHeader() {
               </div>
               <div className="text-end pt-4">
                 <p className="text-sm mb-0 text-capitalize">Bienvenido(a)!</p>
-                <h4 className="mb-0">Jerson Django</h4>
+                <h4 className="mb-0">
+                  {name || "Invitado"} {user ? "👋" : "👤"}
+                </h4>
               </div>
             </div>
             <div className="card-footer p-3"></div>
