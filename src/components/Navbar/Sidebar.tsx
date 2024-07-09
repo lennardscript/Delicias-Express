@@ -1,38 +1,40 @@
 import React from "react";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import firebase from "firebase/compat/app";
 import Swal from "sweetalert2";
+import { auth } from "@/utils/firebase/firebase";
 
 export default function Sidebar() {
   const router = useRouter();
 
+  // Lógica de cerrar sesión
   const handlerSignOut = async () => {
     Swal.fire({
       title: "¿Estas seguro de cerrar sesión?",
-      text: "Se cerrará la sesiòn actual",
       icon: "warning",
       showCancelButton: true,
       confirmButtonColor: "#3085d6",
       cancelButtonColor: "#d33",
-      confirmButtonText: "Sí, cerrar sesiòn",
+      confirmButtonText: "Si, cerrar sesión",
+      cancelButtonText: "Cancelar",
     }).then(async (result) => {
       if (result.isConfirmed) {
         try {
-          await firebase.auth().signOut();
+          await auth.signOut();
+
+          // Redirecionar al login
           router.push("/auth/sign-in");
+          Swal.fire(
+            "Sesión cerrada",
+            "Has cerrado sesión exitosamente",
+            "success"
+          );
         } catch (error) {
-          console.error("Error al cerrar sesiòn", error);
+          console.error("Error al cerrar sesión", error);
+          Swal.fire("Error", "Hubo un error al cerrar sesión", "error");
         }
       }
     });
-
-    try {
-      await firebase.auth().signOut();
-      router.push("/auth/sign-in");
-    } catch (error) {
-      console.error("Error al cerrar sesiòn", error);
-    }
   };
 
   return (
@@ -98,11 +100,22 @@ export default function Sidebar() {
             </Link>
           </li>
           <li className="nav-item">
-            <button className="nav-link text-white" onClick={handlerSignOut}>
-              <div className="text-white text-center me-2 d-flex align-items-center justify-content-center">
-                <i className="material-icons opacity-10">login</i>
+            <button
+              className="nav-link custom-text-color"
+              onClick={handlerSignOut}
+              style={{ backgroundColor: "#666", color: "#fff" }}
+            >
+              <div className="custom-text-color text-center me-2 d-flex align-items-center justify-content-center">
+                <i
+                  className="material-icons opacity-10"
+                  style={{ color: "inherit" }}
+                >
+                  login
+                </i>
               </div>
-              <span className="nav-link-text ms-1">Cerrar sesión</span>
+              <span className="nav-link-text ms-1" style={{ color: "inherit" }}>
+                Cerrar sesión
+              </span>
             </button>
           </li>
         </ul>

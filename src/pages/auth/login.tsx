@@ -1,18 +1,49 @@
-import 'bootstrap/dist/css/bootstrap.min.css';
+import "bootstrap/dist/css/bootstrap.min.css";
+import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import Head from "next/head";
 import Link from "next/link";
-import { useRouter } from 'next/router';
-import React from "react";
+import { useRouter } from "next/router";
+import React, { useState } from "react";
+import Swal from "sweetalert2";
 
 export default function Login() {
-
   const router = useRouter();
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
 
-  const handleLogin = () => {
+  const handleLogin = async () => {
+
+    if (!email || !password) {
+      Swal.fire({
+        icon: "error",
+        title: "Error",
+        text: "Por favor, completa todos los campos, es obligatorio",
+        confirmButtonText: "Aceptar",
+      });
+      return;
+    }
+
     // Lógica de iniciar sesión
-
-    //Redireccionar al home
-    router.push("/home");
+    try {
+      const auth = getAuth();
+      await signInWithEmailAndPassword(auth, email, password)
+      
+      //Redireccionar al home
+      router.push("/home");
+      Swal.fire({
+        icon: "success",
+        title: "¡Bienvenido!",
+        text: "Has iniciado sesión correctamente",
+        confirmButtonText: "Continuar",
+      });
+    } catch (error) {
+      Swal.fire({
+        icon: "error",
+        title: "Error",
+        text: "Correo o contraseña incorrectas, intentalo de nuevo",
+        confirmButtonText: "Aceptar",
+      })
+    }
   };
 
   return (
@@ -36,12 +67,28 @@ export default function Login() {
                   <div className="card-body">
                     <form role="form">
                       <div className="form-floating mb-4 fade show">
-                        <input type="email" className="form-control form-control-sm" id='floatingInputEmail' placeholder='Correo'/>
-                        <label htmlFor='floatingInputEmail'>Correo</label>
+                        <input
+                          type="email"
+                          className="form-control form-control-sm"
+                          id="floatingInputEmail"
+                          placeholder="Correo"
+                          value={email}
+                          onChange={(e) => setEmail(e.target.value)}
+                        />
+                        <label htmlFor="floatingInputEmail">Correo</label>
                       </div>
                       <div className="form-floating mb-3 fade show">
-                        <input type="password" className="form-control form-control-sm" id='floatingInputPassword' placeholder='Contraseña' />
-                        <label htmlFor='floatingInputPassword'>Contraseña</label>
+                        <input
+                          type="password"
+                          className="form-control form-control-sm"
+                          id="floatingInputPassword"
+                          placeholder="Contraseña"
+                          value={password}
+                          onChange={(e) => setPassword(e.target.value)}
+                        />
+                        <label htmlFor="floatingInputPassword">
+                          Contraseña
+                        </label>
                       </div>
                     </form>
                     <div className="text-center">
