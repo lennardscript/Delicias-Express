@@ -1,17 +1,85 @@
 import "bootstrap/dist/css/bootstrap.min.css";
+import { createUserWithEmailAndPassword, getAuth } from "firebase/auth";
+import { doc, getFirestore, setDoc } from "firebase/firestore";
 import Head from "next/head";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import React from "react";
+import React, { useState } from "react";
+import Swal from "sweetalert2";
 
 export default function Register() {
   const router = useRouter();
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [phone, setPhone] = useState("");
+  const [address, setAddress] = useState("");
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
 
-  const handleRegister = () => {
+  const handleRegister = async () => {
+
+    // Verificar si algún campo está vacío
+
+    if (!name || !email || !phone || !address || !password) {
+      Swal.fire({
+        title: "Error",
+        text: "Por favor, completa todos los campos, es obligatorio",
+        icon: "error",
+        confirmButtonText: "Aceptar",
+      });
+      return;
+    }
+
+    // Si las contraseñas no coinciden, mostrar un mensaje de error
+
+    if (password !== confirmPassword) {
+      Swal.fire({
+        title: "Error",
+        text: "Las contraseñas no coinciden",
+        icon: "error",
+        confirmButtonText: "Aceptar",
+      })
+      return;
+    }
+
     // Lógica de registro
 
-    //Redireccionar al home
-    router.push("/home");
+    try {
+      const auth = getAuth();
+      const userCredential = await createUserWithEmailAndPassword(
+        auth,
+        email,
+        password
+      );
+      const user = userCredential.user;
+
+      const db = getFirestore();
+      await setDoc(doc(db, "users", user.uid), {
+        name: name,
+        email: email,
+        phone: phone,
+        address: address,
+      });
+
+      //Redireccionar al home
+      router.push("/home");
+
+      Swal.fire({
+        title: "Registro exitoso",
+        text: "Ahora puedes iniciar sesión",
+        icon: "success",
+        confirmButtonText: "Aceptar",
+      });
+    } catch (error) {
+      console.log("Error registrando usuario: ", error);
+
+      Swal.fire({
+        title: "Error",
+        text: "No se pudo registrar el usuario",
+        icon: "error",
+        confirmButtonText: "Aceptar",
+      });
+    }
   };
 
   return (
@@ -52,6 +120,8 @@ export default function Register() {
                             className="form-control form-control-sm"
                             id="floatingInputName"
                             placeholder="Nombre"
+                            value={name}
+                            onChange={(e) => setName(e.target.value)}
                           />
                           <label
                             className="form-label"
@@ -66,6 +136,8 @@ export default function Register() {
                             className="form-control form-control-sm"
                             id="floatingInputEmail"
                             placeholder="Correo"
+                            value={email}
+                            onChange={(e) => setEmail(e.target.value)}
                           />
                           <label
                             className="form-label"
@@ -80,6 +152,8 @@ export default function Register() {
                             className="form-control form-control-sm"
                             id="floatingInputPhone"
                             placeholder="Telefono"
+                            value={phone}
+                            onChange={(e) => setPhone(e.target.value)}
                           />
                           <label
                             className="form-label"
@@ -94,6 +168,8 @@ export default function Register() {
                             className="form-control form-control-sm"
                             id="floatingInputAddress"
                             placeholder="Dirección"
+                            value={address}
+                            onChange={(e) => setAddress(e.target.value)}
                           />
                           <label
                             className="form-label"
@@ -108,6 +184,8 @@ export default function Register() {
                             className="form-control form-control-sm"
                             id="floatingInputPassword"
                             placeholder="Contraseña"
+                            value={password}
+                            onChange={(e) => setPassword(e.target.value)}
                           />
                           <label
                             className="form-label"
@@ -122,6 +200,8 @@ export default function Register() {
                             className="form-control form-control-sm"
                             id="floatingInputConfirmPassword"
                             placeholder="Confirmar contraseña"
+                            value={confirmPassword}
+                            onChange={(e) => setConfirmPassword(e.target.value)}
                           />
                           <label
                             className="form-label"

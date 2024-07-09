@@ -1,9 +1,39 @@
 import React from "react";
 import Link from "next/link";
 import { useRouter } from "next/router";
+import firebase from "firebase/compat/app";
+import Swal from "sweetalert2";
 
 export default function Sidebar() {
   const router = useRouter();
+
+  const handlerSignOut = async () => {
+    Swal.fire({
+      title: "¿Estas seguro de cerrar sesión?",
+      text: "Se cerrará la sesiòn actual",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Sí, cerrar sesiòn",
+    }).then(async (result) => {
+      if (result.isConfirmed) {
+        try {
+          await firebase.auth().signOut();
+          router.push("/auth/sign-in");
+        } catch (error) {
+          console.error("Error al cerrar sesiòn", error);
+        }
+      }
+    });
+
+    try {
+      await firebase.auth().signOut();
+      router.push("/auth/sign-in");
+    } catch (error) {
+      console.error("Error al cerrar sesiòn", error);
+    }
+  };
 
   return (
     <aside
@@ -29,7 +59,12 @@ export default function Sidebar() {
       >
         <ul className="navbar-nav">
           <li className="nav-item">
-            <Link className={`nav-link text-white ${router.pathname === "/home" ? "bg-danger" : ""}`} href="/home">
+            <Link
+              className={`nav-link text-white ${
+                router.pathname === "/home" ? "bg-danger" : ""
+              }`}
+              href="/home"
+            >
               <div className="text-white text-center me-2 d-flex align-items-center justify-content-center">
                 <i className="material-icons opacity-10">dashboard</i>
               </div>
@@ -37,7 +72,12 @@ export default function Sidebar() {
             </Link>
           </li>
           <li className="nav-item">
-            <Link className={`nav-link text-white ${router.pathname === "/orders" ? "bg-danger" : ""}`} href="/orders">
+            <Link
+              className={`nav-link text-white ${
+                router.pathname === "/orders" ? "bg-danger" : ""
+              }`}
+              href="/orders"
+            >
               <div className="text-white text-center me-2 d-flex align-items-center justify-content-center">
                 <i className="material-icons opacity-10">table_view</i>
               </div>
@@ -45,7 +85,12 @@ export default function Sidebar() {
             </Link>
           </li>
           <li className="nav-item">
-            <Link className={`nav-link text-white ${router.pathname === "/invoices" ? "bg-danger" : ""}`} href="/invoices">
+            <Link
+              className={`nav-link text-white ${
+                router.pathname === "/invoices" ? "bg-danger" : ""
+              }`}
+              href="/invoices"
+            >
               <div className="text-white text-center me-2 d-flex align-items-center justify-content-center">
                 <i className="material-icons opacity-10">receipt_long</i>
               </div>
@@ -53,12 +98,12 @@ export default function Sidebar() {
             </Link>
           </li>
           <li className="nav-item">
-            <Link className="nav-link text-white " href="/sig-in">
+            <button className="nav-link text-white" onClick={handlerSignOut}>
               <div className="text-white text-center me-2 d-flex align-items-center justify-content-center">
                 <i className="material-icons opacity-10">login</i>
               </div>
               <span className="nav-link-text ms-1">Cerrar sesión</span>
-            </Link>
+            </button>
           </li>
         </ul>
       </div>
