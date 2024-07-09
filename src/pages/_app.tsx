@@ -1,25 +1,44 @@
-import { useEffect } from 'react';
-import { useRouter } from 'next/router';
-import Login from './Login';
-import { AppProps } from 'next/app';
-import Layout from '@/components/layout/Layout';
+import '../utils/firebase/firebase.ts';
+import { useEffect } from "react";
+import { useRouter } from "next/router";
+import { AppProps } from "next/app";
+import Layout from "@/components/layout/Layout";
+import Script from "next/script";
 
 export default function App({ Component, pageProps }: AppProps) {
-  const router = useRouter();
-
-  useEffect(() => {
-    // Verificar si la ruta actual no es '/Login'
-    if (router.pathname !== '/Login') {
-      // Redirigir a la ruta '/Login'
-      void router.replace('/Login');
-    }
-  }, [router]);
 
   return (
     <>
-    <Layout>
-      <Login />
-    </Layout>
+      <Layout>
+        <Component {...pageProps} />
+        {/* Agrega los scripts aquí */}
+        {/* <Script src="/assets/js/core/popper.min.js" strategy="lazyOnload" />
+        <Script src="/assets/js/core/bootstrap.min.js" strategy="lazyOnload" />
+        <Script src="/assets/js/plugins/perfect-scrollbar.min.js" strategy="lazyOnload" />
+        <Script src="/assets/js/material-dashboard.min.js" strategy="lazyOnload" /> */}
+      </Layout>
     </>
   );
 }
+
+App.getInitialProps = async ({ Component, ctx }) => {
+  const { res, pathname } = ctx;
+
+  if (pathname === "/") {
+    if (res) {
+      res.writeHead(307, { Location: "/sign-in" });
+      res.end();
+    } else {
+      ctx.res.writeHead(307, { Location: "/sign-in" });
+      ctx.res.end();
+    }
+  }
+
+  let pageProps = {};
+
+  if (Component.getInitialProps) {
+    pageProps = await Component.getInitialProps(ctx);
+  }
+
+  return { pageProps };
+};

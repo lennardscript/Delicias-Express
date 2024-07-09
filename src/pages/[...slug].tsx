@@ -1,19 +1,20 @@
-import { useRouter } from 'next/router';
-import Login from './Login';
+import { useRouter } from "next/router";
+import Login from "./auth/login";
+import Register from "./auth/register";
 
 export default function DynamicRoute() {
   const router = useRouter();
   const { slug } = router.query;
 
-  // Verificar si la ruta actual es '/'
-  if (slug?.[0] === '') {
-    // Redirigir a la ruta '/Login'
-    void router.replace('/Login');
-  }
+  console.log(slug);
 
-  return (
-    <>
-      <Login />
-    </>
-  );
+  // Renderiza el componente correspondiente a la ruta
+  if (slug?.[0] === "sign-up") {
+    return <Register />;
+  } else if (slug?.[0] === "sign-in") {
+    return <Login />;
+  } else {
+    // Si la ruta no coincide con ninguna de las anteriores, puedes redirigir a la página de inicio de sesión por defecto
+    return <Login />;
+  }
 }
