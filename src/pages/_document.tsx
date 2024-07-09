@@ -23,7 +23,7 @@ class MyDocument extends Document {
             href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900|Roboto+Slab:400,700"
           />
           <link href="/assets/css/nucleo-icons.css" rel="stylesheet" />
-          <link href="/assets/css/nucleo-svg.css" rel="stylesheet" />
+          <link href="/assets/css/nucleo-svg.css" rel="stylesheet"  />
           <script
             src="https://kit.fontawesome.com/42d5adcbca.js"
             crossOrigin="anonymous"
