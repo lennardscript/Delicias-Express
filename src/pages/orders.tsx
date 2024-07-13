@@ -500,7 +500,7 @@ export default function Orders() {
                                   className="btn btn-lg bg-danger btn-lg w-100 mt-2 mb-3 text-white"
                                   onClick={saveOrder}
                                 >
-                                  Generar factura
+                                  Generar orden
                                 </button>
                               </div>
                             </div>
