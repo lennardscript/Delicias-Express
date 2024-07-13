@@ -1,3 +1,4 @@
+import "bootstrap/dist/css/bootstrap.min.css";
 import Footer from "@/components/Footer/Footer";
 import CardHeader from "@/components/Home/CardHeader";
 import CardIcon from "@/components/Home/CardIcon";
@@ -22,13 +23,13 @@ export default function Home() {
           </div>
         </div>
       </div>
-      <Footer />
       <div className="container">
         <CardHeader />
         <div className="row justify-content-center">
           <CardIcon />
         </div>
       </div>
+      <Footer />
     </>
   );
 }

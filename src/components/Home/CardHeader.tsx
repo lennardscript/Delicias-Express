@@ -43,7 +43,6 @@ export default function CardHeader() {
                 </h4>
               </div>
             </div>
-            <div className="card-footer p-3"></div>
           </div>
         </div>
       </div>
