@@ -16,7 +16,7 @@ export interface OrderData {
     direccion_cliente: string;
     comuna_cliente: string;
   };
-  products: {
+  products?: {
     name: string;
     quantity: number;
     price: number;

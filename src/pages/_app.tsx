@@ -1,4 +1,5 @@
 import '../utils/firebase/firebase.ts';
+import '@/pages/styles/sweetalert2.css';
 import { useEffect } from "react";
 import { useRouter } from "next/router";
 import { AppProps } from "next/app";
