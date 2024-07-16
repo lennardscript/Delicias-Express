@@ -25,4 +25,6 @@ export interface OrderData {
   iva: number;
   subtotal: number;
   estado: 1 | 2 | 3 | 4 | 5; // 1: Creado, 2: Rectificado, 3: Entregado, 4: Rechazado, 5: Anulado
+  imageName?: string;
+  motivoRechazo?: string;
 }
