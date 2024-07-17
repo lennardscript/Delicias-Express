@@ -722,6 +722,8 @@ export default function CardInfo() {
                   <PDFDownloadLink
                     document={<OrderPDF order={order} />}
                     fileName={`Orden_${order.id}.pdf`}
+                    target="_blank"
+                    download={false}
                     className="btn btn-link text-dark text-sm mb-0 px-0 ms-2"
                   >
                     <i className="material-icons text-lg position-relative me-1">
