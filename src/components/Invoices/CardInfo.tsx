@@ -18,9 +18,20 @@ import {
   uploadBytesResumable,
 } from "firebase/storage";
 
+
+
 export default function CardInfo() {
   const [orders, setOrders] = useState<{ id: string; data: OrderData }[]>([]);
   const [orderData, setOrderData] = useState({});
+
+  // Contadores de estado
+  const [counts, setCounts] = useState({
+    creado: 0,
+    rectificado: 0,
+    entregado: 0,
+    rechazado: 0,
+    anulado: 0,
+  });
 
   useEffect(() => {
     const fetchOrders = async () => {
@@ -32,6 +43,41 @@ export default function CardInfo() {
         data: doc.data() as OrderData,
       }));
       setOrders(ordersData);
+
+      // Calcular contadores
+      const estadoCounts = ordersData.reduce(
+        (acc, order) => {
+          switch (order.data.estado) {
+            case 1:
+              acc.creado++;
+              break;
+            case 2:
+              acc.rectificado++;
+              break;
+            case 3:
+              acc.entregado++;
+              break;
+            case 4:
+              acc.rechazado++;
+              break;
+            case 5:
+              acc.anulado++;
+              break;
+            default:
+              break;
+          }
+          return acc;
+        },
+        {
+          creado: 0,
+          rectificado: 0,
+          entregado: 0,
+          rechazado: 0,
+          anulado: 0,
+        }
+      );
+      setCounts(estadoCounts);
+    
     };
 
     fetchOrders();
@@ -183,6 +229,14 @@ export default function CardInfo() {
   };
 
   const handleEditOrder = (order: { id: string; data: OrderData }) => {
+    
+    let orderData = {
+      products: order.data.products || [], // Inicializar con los valores existentes
+      total: order.data.total || 0,
+      iva: order.data.iva || 0,
+      subtotal: order.data.subtotal || 0,
+    };
+
     setOrderData(order.data);
   
     Swal.fire({
@@ -413,6 +467,10 @@ export default function CardInfo() {
             <input type="text" id="rut-cliente" class="form-control" placeholder="Ingresa el RUT del cliente" />
           </div>
           <div class="mb-3">
+            <label for="direccion-cliente">Dirección del cliente:</label>
+            <input type="text" id="direccion-cliente" class="form-control" placeholder="Ingresa la dirección del cliente" />
+          </div>
+          <div class="mb-3">
             <label for="imagen-cliente">Sube una imagen:</label>
             <input type="file" id="imagen-cliente" class="form-control" />
           </div>
@@ -475,6 +533,7 @@ export default function CardInfo() {
         );
       }
     };
+      
   
     const handleEstadoRechazado = async (order: {
       id: string;
@@ -497,6 +556,7 @@ export default function CardInfo() {
         // Actualizar la orden con el motivo del rechazo
         const updatedOrderData = {
           motivoRechazo: motivo,
+          vecesRechazado: (order.data.vecesRechazado || 0) + 1,
         }
 
         try {
@@ -525,6 +585,16 @@ export default function CardInfo() {
   
   return (
     <>
+      {/* Contadores de estado */}
+      <div className="d-flex justify-content-around mt-4 mb-4">
+        <div className="badge bg-success">Creado: {counts.creado}</div>
+        <div className="badge bg-warning">Rectificado: {counts.rectificado}</div>
+        <div className="badge bg-primary">Entregado: {counts.entregado}</div>
+        <div className="badge bg-danger">Rechazado: {counts.rechazado}</div>
+        <div className="badge bg-secondary">Anulado: {counts.anulado}</div>
+      </div>
+
+
       {/* Card de ordenes y facturas */}
       <div className="card-body pt-4 p-3">
         {orders.length === 0 ? (
@@ -624,6 +694,11 @@ export default function CardInfo() {
                 </div>
 
                 <div className="ms-auto text-end">
+                  {order.data.estado === 4 && order.data.vecesRechazado > 0 && (
+                    <div className="text-danger mb-2">
+                      N° de veces rechazadas: {order.data.vecesRechazado}
+                    </div>
+                  )}
                   <button
                     className="btn btn-danger btn-sm mb-0"
                     onClick={() => handleViewOrder(order)}

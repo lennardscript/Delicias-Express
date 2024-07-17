@@ -33,6 +33,7 @@ export default function Orders() {
     iva: 0,
     subtotal: 0,
     estado: 1,
+    vecesRechazado: 0,
   });
 
   const [productName, setProductName] = useState('');
@@ -103,11 +104,10 @@ export default function Orders() {
 
     setOrderData((prevOrderData) => ({
       ...prevOrderData,
-      products: [...prevOrderData.products, newProducto],
+      products: (prevOrderData.products || []).concat([newProducto]),
       total: prevOrderData.total + productQuantity * productPrice,
       iva: prevOrderData.iva + (productPrice * productQuantity * 0.19),
-      subtotal: prevOrderData.subtotal + (productPrice * productQuantity * 1.19),
-    }))
+    }));
 
     setProductName('');
     setProductQuantity(0);
@@ -154,6 +154,9 @@ export default function Orders() {
         iva: 0,
         subtotal: 0,
         estado: 1,
+        imageName: '',
+        motivoRechazo: '',
+        vecesRechazado: 0,
       });
       Swal.fire({
         title: 'Orden guardada',

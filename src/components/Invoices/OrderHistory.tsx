@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { getOrderHistory } from './api'; // Función para obtener historial de órdenes desde tu API
+import { getOrderHistory } from './api'; // Asegúrate de que esta importación esté correcta según tu proyecto
 
 const OrderHistory = () => {
   const [orderHistory, setOrderHistory] = useState([]);
