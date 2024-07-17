@@ -33,6 +33,7 @@ export default function Orders() {
     iva: 0,
     subtotal: 0,
     estado: 1,
+    vecesRechazado: 0,
   });
 
   const [productName, setProductName] = useState('');
@@ -101,13 +102,17 @@ export default function Orders() {
       price: productPrice,
     };
 
-    setOrderData((prevOrderData) => ({
-      ...prevOrderData,
-      products: [...prevOrderData.products, newProducto],
-      total: prevOrderData.total + productQuantity * productPrice,
-      iva: prevOrderData.iva + (productPrice * productQuantity * 0.19),
-      subtotal: prevOrderData.subtotal + (productPrice * productQuantity * 1.19),
-    }))
+    const newTotal = (orderData.total || 0) + productQuantity * productPrice;
+    const newIva = (orderData.iva || 0) + productPrice * productQuantity * 0.19;
+    const newSubtotal = newTotal + newIva;
+
+  setOrderData((prevOrderData) => ({
+    ...prevOrderData,
+    products: (prevOrderData.products || []).concat([newProducto]),
+    total: newTotal,
+    iva: newIva,
+    subtotal: newSubtotal,
+  }));
 
     setProductName('');
     setProductQuantity(0);
@@ -154,6 +159,9 @@ export default function Orders() {
         iva: 0,
         subtotal: 0,
         estado: 1,
+        imageName: '',
+        motivoRechazo: '',
+        vecesRechazado: 0,
       });
       Swal.fire({
         title: 'Orden guardada',
@@ -444,11 +452,11 @@ export default function Orders() {
                               <h4 className="d-flex justify-content-between align-items-center mb-3">
                                 <span className="text-danger">Productos</span>
                                 <span className="badge bg-danger rounded-pill">
-                                  {orderData.products.length}
+                                  {orderData.products?.length}
                                 </span>
                               </h4>
                               <ul className="list-group mb-3">
-                                {orderData.products.map((product, index) => (
+                                {orderData.products?.map((product, index) => (
                                   
                                 <li key={index} className="list-group-item d-flex justify-content-between lh-sm">
                                   <div>
@@ -456,42 +464,22 @@ export default function Orders() {
                                   </div>
                                   <div className="d-flex align-items-center">
                                     <span className="text-body-secondary">
-                                      {product.price}
+                                      ${product.price}
                                     </span>
                                   </div>
                                 </li>
                                 ))}
-{/*                                 <li className="list-group-item d-flex justify-content-between lh-sm">
-                                  <div>
-                                    <h6 className="my-0">Second product</h6>
-                                  </div>
-                                  <div className="d-flex align-items-center">
-                                    <span className="text-body-secondary">
-                                      $12
-                                    </span>
-                                  </div>
-                                </li>
-                                <li className="list-group-item d-flex justify-content-between lh-sm">
-                                  <div>
-                                    <h6 className="my-0">Third item</h6>
-                                  </div>
-                                  <div className="d-flex align-items-center">
-                                    <span className="text-body-secondary">
-                                      $12
-                                    </span>
-                                  </div>
-                                </li> */}
                                 <li className="list-group-item d-flex justify-content-between">
                                   <span>Total (CLP)</span>
-                                  <strong>{orderData.total}</strong>
+                                  <strong>${orderData.total}</strong>
                                 </li>
                                 <li className="list-group-item d-flex justify-content-between">
                                   <span>IVA (19%)</span>
-                                  <strong>{orderData.iva}</strong>
+                                  <strong>${orderData.iva}</strong>
                                 </li>
                                 <li className="list-group-item d-flex justify-content-between">
                                   <span>Subtotal (Total + IVA)</span>
-                                  <strong>{orderData.subtotal}</strong>
+                                  <strong>${orderData.subtotal}</strong>
                                 </li>
                               </ul>
                               <div className="text-center">

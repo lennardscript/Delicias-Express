@@ -1,0 +1,46 @@
+.swal2-popup-custom {
+  width: 90% !important;
+  max-width: 800px !important;
+  padding: 2rem !important;
+  border-radius: 1rem !important;
+  background-color: #f8f9fa !important;
+  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15) !important;
+}
+
+.swal2-popup-custom .swal2-title {
+  font-size: 1.5rem !important;
+  font-weight: bold !important;
+  margin-bottom: 1.5rem !important;
+}
+
+.swal2-popup-custom .swal2-html-container {
+  font-size: 1rem !important;
+  line-height: 1.5 !important;
+}
+
+.swal2-popup-custom .swal2-close {
+  font-size: 1.5rem !important;
+  color: #6c757d !important;
+}
+
+.product-list {
+  border: 1px solid #dee2e6;
+  border-radius: 0.25rem;
+  padding: 1rem;
+}
+
+.product-item {
+  display: flex;
+  align-items: center;
+  margin-bottom: 0.5rem;
+}
+
+.product-item input {
+  flex: 1;
+  margin-right: 0.5rem;
+}
+
+.product-item input:last-child {
+  margin-right: 0;
+}
+
