@@ -464,26 +464,6 @@ export default function Orders() {
                                   </div>
                                 </li>
                                 ))}
-{/*                                 <li className="list-group-item d-flex justify-content-between lh-sm">
-                                  <div>
-                                    <h6 className="my-0">Second product</h6>
-                                  </div>
-                                  <div className="d-flex align-items-center">
-                                    <span className="text-body-secondary">
-                                      $12
-                                    </span>
-                                  </div>
-                                </li>
-                                <li className="list-group-item d-flex justify-content-between lh-sm">
-                                  <div>
-                                    <h6 className="my-0">Third item</h6>
-                                  </div>
-                                  <div className="d-flex align-items-center">
-                                    <span className="text-body-secondary">
-                                      $12
-                                    </span>
-                                  </div>
-                                </li> */}
                                 <li className="list-group-item d-flex justify-content-between">
                                   <span>Total (CLP)</span>
                                   <strong>{orderData.total}</strong>
